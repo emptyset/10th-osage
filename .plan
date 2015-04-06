@@ -1,0 +1,37 @@
+scrape the data
+---------------
+
+use scrapy
+west-bound schedule
+able to extract items with td id, depart_time
+  id is in the form: td<number>-<number
+  I need to filter the list where id starts with "td" and ends with "-4"
+  xpath matches does not work since apparently scrapy only uses xpath 1.0
+  scrapy crawl rtd -o items.json
+
+[x] west-bound (W) schedule (depart times from Auraria West)
+[ ] north-bound (E) schedule (depart times from 10th/Osage, arrival times at Auraria West)
+[ ] north-bound (C) schedule (depart times from 10th/Osage, arrival times at Auraria West)
+  figure out how to also scrape the north-bound C schedule in a different spider
+
+
+store the data
+--------------
+
+data must be stored in format that an Android app can consume
+  ideally, periodic checks for updated schedules...code to that in the Android app [future feature]
+
+
+study the data
+--------------
+
+the user got off at 10th and Osage; waiting on transfer to northbound C line, then to switch to W line
+based on the current time;
+determine if the user should sprint to the Auraria West station, or wait on the next northbound C train
+
+so the "Should I Sprint?" test is: 
+      the next W train departs from Auraria West in at least 10 min (the user can get there in time)
+  AND the time of arrival of next northbound C train is greater than 10 min (it's worth it to sprint over)
+
+the "Should I Wait?" test is:
+      the next W train departs in less than 10 min (the user can't make it if they tried)
