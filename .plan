@@ -14,6 +14,15 @@ able to extract items with td id, depart_time
 [ ] north-bound (C) schedule (depart times from 10th/Osage, arrival times at Auraria West)
   figure out how to also scrape the north-bound C schedule in a different spider
 
+extract for M-H, F, S, S/H
+
+item fields:
+route
+depart_time (from 10th and Osage)
+arrive_time (to Auraria West)
+
+Route W arrive_time is to Golden Station (can be null; because W stops short at Federal sometimes)
+Routes C and E have both arrive/depart
 
 store the data
 --------------
@@ -24,6 +33,46 @@ data must be stored in format that an Android app can consume
 
 study the data
 --------------
+
+Concrete Example 1:
+  I arrive at 10th/Osage on D train at 538A [current_time].
+  The next C train arrives at 556A, and arrives at Auraria West at 559A.
+  The next E train arrives at 541A [next_connection_depart_time], and arrives at Auraria West at 544A [next_connection_arrive_time].  <- E is closest
+  The next W train departs Auraria West at 552A [next_depart_time] (and 600A).
+  
+  [next_depart_time] - [current_time] = 14min
+  therefore first condition met to Sprint (enough time to make it)
+  
+  [wait_time] = [next_connect_depart_time] (least of either C or E) - [current_time] = 3min
+  [travel_time] = [next_connection_arrive_time] - [next_connection_depart_time] = 3min
+  [connection_time] = [next_depart_time] - [next_connection_arrive_time] = 8min
+
+  [total_connect_time] = [wait_time] + [travel_time] + [connection_time] = 14min
+
+  In this case, no time is saved by sprinting, but it's a little exercise!
+
+Concrete Example 2:
+  [current_time] = 732A
+  [next_connection_depart_time] = lesser of (C, 756A) or (E, 741A) = 741A
+  [next_connection_arrive_time] = 744A
+  [next_depart_time] = first W depart_time after [next_connection_arrive_time] where W arrive_time is not null = 752A
+
+  [sprint_time] = [next_depart_time] - [current_time] = 20min
+
+  [wait_time] = [next_connection_depart_time] - [current_time] = 9min
+  [travel_time] = [next_connection_arrive_time] - [next_connection_depart_time] = 3min
+  [connection_time] = [next_depart_time] - [next_connection_arrive_time] = 752A - 744A = 6min
+
+  [total_connect_time] = 18min
+
+   
+
+NOTE: Some W trains stop short at Federal Center; so W's arrive_time  
+
+
+Should I Sprint?
+  does a W arrive at Auraria West >= 10min from current_time
+  arrival of next C train at Auraria West 
 
 the user got off at 10th and Osage; waiting on transfer to northbound C line, then to switch to W line
 based on the current time;

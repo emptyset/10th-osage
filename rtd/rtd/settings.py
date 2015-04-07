@@ -17,5 +17,5 @@ NEWSPIDER_MODULE = 'rtd.spiders'
 USER_AGENT = 'rtd (+http://faysoftware.com)'
 
 ITEM_PIPELINES = {
-        'rtd.pipelines.RtdWestPipeline': 100
+        'rtd.pipelines.RtdPipeline': 100
         }
