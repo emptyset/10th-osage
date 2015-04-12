@@ -25,13 +25,13 @@ class RtdWestSpider(scrapy.Spider):
             # E/F/H (SH)
             "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=101&routeType=2&direction=N-Bound&serviceType=2&branch=&branch=&branch=&branch=&branch=&branch=&lineName=SE&branch=&colStart=16&colEnd=17&rowStart=0&rowEnd=0",
             # W (MH)
-            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=4&branch=W&branch=W&branch=W&branch=W&lineName=W&branch=W&colStart=4&colEnd=15&rowStart=0&rowEnd=0",
+            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=4&branch=W&branch=W&lineName=W&branch=W&colStart=4&colEnd=15&rowStart=0&rowEnd=0",
             # W (F)
-            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=5&branch=&branch=&lineName=W&branch=&colStart=4&colEnd=15&rowStart=0&rowEnd=0",
+            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=5&branch=W&branch=W&branch=W&branch=W&lineName=W&branch=W&colStart=4&colEnd=15&rowStart=0&rowEnd=0",
             # W (S)
-            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=1&branch=&branch=&branch=&branch=&lineName=W&branch=&colStart=4&colEnd=15&rowStart=0&rowEnd=0",
+            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=1&branch=W&branch=W&branch=W&branch=W&branch=W&branch=W&lineName=W&branch=W&colStart=4&colEnd=15&rowStart=0&rowEnd=0",
             # W (SH)
-            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=2&branch=&branch=&branch=&branch=&branch=&branch=&lineName=W&branch=&colStart=4&colEnd=15&rowStart=0&rowEnd=0"
+            "http://www3.rtd-denver.com/schedules/getSchedule.action?runboardId=151&routeId=103&routeType=2&direction=W-Bound&serviceType=2&branch=W&branch=W&branch=W&branch=W&branch=W&branch=W&branch=W&branch=W&lineName=W&branch=W&colStart=4&colEnd=15&rowStart=0&rowEnd=0"
         ]
 
     def parse(self, response):

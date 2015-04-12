@@ -10,11 +10,11 @@ able to extract items with td id, depart_time
   scrapy crawl rtd -o items.json
 
 [x] west-bound (W) schedule (depart times from Auraria West)
-[ ] north-bound (E) schedule (depart times from 10th/Osage, arrival times at Auraria West)
-[ ] north-bound (C) schedule (depart times from 10th/Osage, arrival times at Auraria West)
+[x] north-bound (E) schedule (depart times from 10th/Osage, arrival times at Auraria West)
+[x] north-bound (C) schedule (depart times from 10th/Osage, arrival times at Auraria West)
   figure out how to also scrape the north-bound C schedule in a different spider
 
-extract for M-H, F, S, S/H
+[x] extract for M-H, F, S, S/H
 
 item fields:
 route
@@ -26,6 +26,12 @@ Routes C and E have both arrive/depart
 
 store the data
 --------------
+
+store data in SQLite
+convert time "[0-9]i{4}[A|P]" -> "[0-9]{4}"
+"--" -> NULL
+
+
 
 data must be stored in format that an Android app can consume
   ideally, periodic checks for updated schedules...code to that in the Android app [future feature]
