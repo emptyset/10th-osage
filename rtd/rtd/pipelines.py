@@ -10,7 +10,7 @@ from scrapy.exceptions import DropItem
 
 class RtdPipeline(object):
     def process_item(self, item, spider):
-        print '-- enter pipeline'
+        # print '-- enter pipeline'
 
         # if route is W, then
         #   depart_time is departure from Auraria West
@@ -25,11 +25,11 @@ class RtdPipeline(object):
         print route, depart_time, arrive_time
 
         if route in ["C", "D", "E", "F", "H", "W"]:
-            print '-- return item'
-            print '-- exit pipeline'
+            # print '-- return item'
+            # print '-- exit pipeline'
             return item
         else:
-            print '-- drop item'
-            print '-- exit pipeline'
+            # print '-- drop item'
+            # print '-- exit pipeline'
             raise DropItem("%s" % item)
 

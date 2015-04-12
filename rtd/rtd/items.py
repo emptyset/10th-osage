@@ -9,6 +9,8 @@ from scrapy.contrib.loader.processor import TakeFirst
 import scrapy
 
 class RtdItem(scrapy.Item):
+    # Northbound, Southbound
+    direction = scrapy.Field()
     # MH (Monday-Thursday), F (Friday), S (Saturday), SH (Sunday/Holiday)
     day = scrapy.Field()
     # C, D, E, F, H, or W
