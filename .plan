@@ -13,7 +13,6 @@ able to extract items with td id, depart_time
 [x] north-bound (E) schedule (depart times from 10th/Osage, arrival times at Auraria West)
 [x] north-bound (C) schedule (depart times from 10th/Osage, arrival times at Auraria West)
   figure out how to also scrape the north-bound C schedule in a different spider
-
 [x] extract for M-H, F, S, S/H
 
 item fields:
@@ -27,11 +26,10 @@ Routes C and E have both arrive/depart
 store the data
 --------------
 
-store data in SQLite
-convert time "[0-9]i{4}[A|P]" -> "[0-9]{4}"
-"--" -> NULL
-
-
+[x] convert time "[0-9]i{4}[A|P]" -> "[0-9]{4}"
+[x] "--" -> NULL
+[x] verify android has built-in support for SQLite
+[x] export data to SQLite from within the rtd_pipeline
 
 data must be stored in format that an Android app can consume
   ideally, periodic checks for updated schedules...code to that in the Android app [future feature]
@@ -39,6 +37,25 @@ data must be stored in format that an Android app can consume
 
 study the data
 --------------
+
+[ ] script that takes in [current_time], and outputs [next_depart_time], [wait_time], [travel_time]
+
+user is at 10th/osage
+  convert current time to integer format // ex. 923A -> 923
+
+  // select first connecting train [next_connection_depart_time], [next_connection_arrive_time]
+  select from schedule where route in ('C', 'E') and depart_time > [current_time] order by depart_time ASC LIMIT 1
+  // list of all W trains leaving Auraria West that will arrive at Golden
+  // first record is the soonest W train [closest_depart_time]
+  select from schedule where route = 'W' and depart_time > [current_time] and arrive_time <> NULL order by depart_time ASC LIMIT 1
+  // first record is the soonest W train after connection is made [connection_depart_time]
+  select from schedule where route = 'W' and depart_time >= [next_connection_arrive_time] and arrive_time <> NULL order by depart_time ASC LIMIT 1
+
+  we want [closest_depart_time] >= 10 and [connection_depart_time] > [closest_depart_time]
+    this means you can sprint and catch the earliest possible W train leaving for Golden
+  otherwise, you should stay and make connection
+ 
+[ ] make a script to run through all possible 10th/Osage arrive times and list out total trip time; to find the min(s) 
 
 Concrete Example 1:
   I arrive at 10th/Osage on D train at 538A [current_time].
