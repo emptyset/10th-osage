@@ -70,25 +70,18 @@ class RtdPipeline(object):
             # print '-- exit pipeline'
             raise DropItem("%s" % item)
 
+    # TODO: definite move into common module
     def convert_time(self, time):
-        if (time == "--"):
-            return None 
+        if time == '--':
+            return None
 
-        # convert the time into an integer to make comparison easier
-        # ex. 1225A -> 25
-        # ex. 905A -> 905
-        # ex. 1225P -> 1225
-        # ex. 645P -> 1845
-        
         am_pm = time[len(time) - 1]
-
+        time = time[:-1]
         if (am_pm == 'A'):
-            time = time[:-1]
-            if (len(time) == 4 and time[:2] == "12"):
+            if (len(time) == 4 and time[:2] == '12'):
                 time = int(time) - 1200
-        else: # am_pm == 'P'
-            time = time[:-1]
-            if (time[:2] != "12"):
+        else:
+            if (len(time) == 3 or (len(time) == 4 and time[:2] != '12')):
                 time = 1200 + int(time)
 
         return int(time)
